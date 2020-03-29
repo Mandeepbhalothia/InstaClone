@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">InstaClone</string>
+    <string name="home">Home</string>
+    <string name="search">Search</string>
+    <string name="add_more">Add More</string>
+    <string name="likes">Likes</string>
+    <string name="profile">Profile</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="mandeep_bhalothia">Mandeep Bhalothia</string>
+    <string name="open_drawer">Open Nav Drawer</string>
+    <string name="close_drawer">Close Nav Drawer</string>
+</resources>

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".profile.ProfileFragment">
+
+    <!--full screen-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/mainContent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--Toolbar-->
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/white"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/profile_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/toolbar_name"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="4dp"
+                        android:ellipsize="end"
+                        android:gravity="center_vertical"
+                        android:text="@string/mandeep_bhalothia"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/toolbar_text_size"
+                        app:layout_constraintEnd_toStartOf="@id/toolbar_option"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageButton
+                        android:id="@+id/toolbar_option"
+                        android:layout_width="40dp"
+                        android:layout_height="45dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="@drawable/option"
+                        android:visibility="visible"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <!--Nav bar-->
+    <RelativeLayout
+        android:layout_width="250dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/nav_user_name_tv"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:gravity="center_vertical"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:ellipsize="end"
+            android:text="@string/mandeep_bhalothia"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size"
+            android:textStyle="bold" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/nav_user_name_tv"
+            android:background="@color/gray"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/nav_user_name_tv"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:paddingStart="@dimen/eight_dp_padding"
+                android:paddingEnd="@dimen/eight_dp_padding"
+                android:src="@drawable/ic_settings" />
+
+            <TextView
+                android:id="@+id/firstOption"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:text="First Option"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size" />
+        </LinearLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignTop="@id/nav_setting_layout"
+            android:background="@color/gray" />
+
+        <LinearLayout
+            android:id="@+id/nav_setting_layout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/app_bar_height"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:paddingStart="@dimen/eight_dp_padding"
+                android:paddingEnd="@dimen/eight_dp_padding"
+                android:src="@drawable/ic_settings" />
+
+            <TextView
+                android:id="@+id/settingTv"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/app_bar_height"
+                android:layout_gravity="bottom"
+                android:gravity="center_vertical"
+                android:text="Settings"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size" />
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+</androidx.drawerlayout.widget.DrawerLayout>
