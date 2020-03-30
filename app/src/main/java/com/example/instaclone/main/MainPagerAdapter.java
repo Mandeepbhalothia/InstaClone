@@ -26,7 +26,7 @@ public class MainPagerAdapter extends FragmentPagerAdapter {
         return fragmentList.size();
     }
 
-    public void addFragment(Fragment fragment){
+    void addFragment(Fragment fragment){
         fragmentList.add(fragment);
     }
 
