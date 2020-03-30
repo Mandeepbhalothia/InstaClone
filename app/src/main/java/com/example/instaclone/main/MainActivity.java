@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     FrameLayout fragmentContainer;
     BottomNavigationView bottomNavigationView;
     MenuItem lasTSelectedMenu;
+    Fragment mainFragment, searchFragment, addMoreFragment, likesFragment, profileFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,31 +60,41 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.homeMenu:
                         if (lasTSelectedMenu != item) {
-                            loadFragment(new MainFragment());
+                            if (mainFragment==null)
+                                mainFragment = new MainFragment();
+                            loadFragment(mainFragment);
                             lasTSelectedMenu = item;
                             break;
                         }
                     case R.id.searchMenu:
                         if (lasTSelectedMenu != item) {
-                            loadFragment(new SearchFragment());
+                            if (searchFragment==null)
+                                searchFragment = new SearchFragment();
+                            loadFragment(searchFragment);
                             lasTSelectedMenu = item;
                             break;
                         }
                     case R.id.addMenu:
                         if (lasTSelectedMenu != item) {
-                            loadFragment(new AddMoreFragment());
+                            if (addMoreFragment == null)
+                                addMoreFragment = new AddMoreFragment();
+                            loadFragment(addMoreFragment);
                             lasTSelectedMenu = item;
                             break;
                         }
                     case R.id.likeMenu:
                         if (lasTSelectedMenu != item) {
-                            loadFragment(new LikesFragment());
+                            if (likesFragment == null)
+                                likesFragment = new LikesFragment();
+                            loadFragment(likesFragment);
                             lasTSelectedMenu = item;
                             break;
                         }
                     case R.id.profileMenu:
                         if (lasTSelectedMenu != item) {
-                            loadFragment(new ProfileFragment());
+                            if (profileFragment == null)
+                                profileFragment = new ProfileFragment();
+                            loadFragment(profileFragment);
                             lasTSelectedMenu = item;
                             break;
                         }
