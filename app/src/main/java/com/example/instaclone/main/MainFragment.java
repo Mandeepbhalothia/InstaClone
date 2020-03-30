@@ -1,7 +1,6 @@
 package com.example.instaclone.main;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,7 +69,7 @@ public class MainFragment extends Fragment {
             Toast.makeText(getContext(), "Fragment Manager Is Null", Toast.LENGTH_SHORT).show();
             return;
         }
-        MainPagerAdapter mainPagerAdapter = new MainPagerAdapter(getFragmentManager(),
+        MainPagerAdapter mainPagerAdapter = new MainPagerAdapter(getChildFragmentManager(),
                 FragmentPagerAdapter.POSITION_UNCHANGED);
         mainPagerAdapter.addFragment(new CameraFragment());
         mainPagerAdapter.addFragment(new HomeFragment());
