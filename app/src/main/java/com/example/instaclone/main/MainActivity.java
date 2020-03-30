@@ -1,19 +1,17 @@
 package com.example.instaclone.main;
 
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.widget.FrameLayout;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.FrameLayout;
-
 import com.example.instaclone.R;
 import com.example.instaclone.addMore.AddMoreFragment;
-import com.example.instaclone.home.HomeFragment;
 import com.example.instaclone.likes.LikesFragment;
 import com.example.instaclone.profile.ProfileFragment;
 import com.example.instaclone.search.SearchFragment;

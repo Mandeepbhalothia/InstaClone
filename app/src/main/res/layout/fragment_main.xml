@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".main.MainFragment">
 
     <!--    app bar -->
@@ -10,12 +11,13 @@
         android:id="@+id/appBar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/app_bar_height"
-        android:background="@drawable/app_bar_bg">
+        android:background="@color/white">
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            app:tabIndicatorColor="@android:color/transparent"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 

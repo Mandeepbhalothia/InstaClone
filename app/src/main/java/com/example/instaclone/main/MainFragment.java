@@ -64,5 +64,6 @@ public class MainFragment extends Fragment {
         Objects.requireNonNull(tabLayout.getTabAt(0)).setIcon(R.drawable.ic_camera);
         Objects.requireNonNull(tabLayout.getTabAt(1)).setIcon(R.drawable.instagram_logo);
         Objects.requireNonNull(tabLayout.getTabAt(2)).setIcon(R.drawable.ic_message);
+        viewPager.setCurrentItem(1);
     }
 }
