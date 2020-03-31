@@ -20,7 +20,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class MainActivity extends AppCompatActivity {
 
     FrameLayout fragmentContainer;
-    BottomNavigationView bottomNavigationView;
+    public static BottomNavigationView bottomNavigationView;
     MenuItem lasTSelectedMenu;
     Fragment mainFragment, searchFragment, addMoreFragment, likesFragment, profileFragment;
 
@@ -60,15 +60,16 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.homeMenu:
                         if (lasTSelectedMenu != item) {
-                            if (mainFragment==null)
-                                mainFragment = new MainFragment();
+                            // to always start home fragment
+//                            if (mainFragment==null)
+                            mainFragment = new MainFragment();
                             loadFragment(mainFragment);
                             lasTSelectedMenu = item;
                             break;
                         }
                     case R.id.searchMenu:
                         if (lasTSelectedMenu != item) {
-                            if (searchFragment==null)
+                            if (searchFragment == null)
                                 searchFragment = new SearchFragment();
                             loadFragment(searchFragment);
                             lasTSelectedMenu = item;

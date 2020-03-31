@@ -1,8 +1,16 @@
 package com.example.instaclone.profile;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,23 +18,20 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
-
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ExpandableListView;
-import android.widget.ImageButton;
-import android.widget.TextView;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import com.example.instaclone.R;
+import com.google.android.material.tabs.TabLayout;
 
 import java.util.Objects;
 
 public class ProfileFragment extends Fragment {
 
     private TextView userNameTv;
+    private ProfilePagerAdapter profilePagerAdapter;
+    private TabLayout profileTabLayout;
+    private ViewPager profileViewPager;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -49,6 +54,9 @@ public class ProfileFragment extends Fragment {
         Toolbar toolbar = view.findViewById(R.id.profile_toolbar);
         ((AppCompatActivity) Objects.requireNonNull(getActivity())).setSupportActionBar(toolbar);
         userNameTv = view.findViewById(R.id.toolbar_name);
+        profileTabLayout = view.findViewById(R.id.profileTabLayout);
+        profileViewPager = view.findViewById(R.id.profileViewPager);
+        LinearLayout settingLayout = view.findViewById(R.id.nav_setting_layout);
 
         final ConstraintLayout contentLayout = view.findViewById(R.id.mainContent);
         ImageButton toolbarOptionBtn = view.findViewById(R.id.toolbar_option);
@@ -75,7 +83,29 @@ public class ProfileFragment extends Fragment {
                 }
             }
         });
+        
+        setUpAdapter();
+
+
+        settingLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(),AccountsSetting.class));
+            }
+        });
 
         return view;
+    }
+
+    private void setUpAdapter() {
+        profilePagerAdapter = new ProfilePagerAdapter(getChildFragmentManager(), FragmentPagerAdapter.POSITION_UNCHANGED);
+        profilePagerAdapter.addFragment(new PostFragment());
+        profilePagerAdapter.addFragment(new TagFragment());
+        profileViewPager.setAdapter(profilePagerAdapter);
+        profileTabLayout.setupWithViewPager(profileViewPager,true);
+        Objects.requireNonNull(profileTabLayout.getTabAt(0)).setIcon(R.drawable.ic_grid);
+        Objects.requireNonNull(profileTabLayout.getTabAt(1)).setIcon(R.drawable.ic_tag);
+        profileViewPager.setScrollX(500);
+
     }
 }

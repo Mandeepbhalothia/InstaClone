@@ -11,4 +11,15 @@
     <string name="mandeep_bhalothia">Mandeep Bhalothia</string>
     <string name="open_drawer">Open Nav Drawer</string>
     <string name="close_drawer">Close Nav Drawer</string>
+    <string name="follow_and_invite_friends">Follow and Invite Friends</string>
+    <string name="about">About</string>
+    <string name="help">Help</string>
+    <string name="account">Account</string>
+    <string name="ads">Ads</string>
+    <string name="security">Security</string>
+    <string name="privacy">Privacy</string>
+    <string name="notifications">Notifications</string>
+    <string name="logins">Logins</string>
+    <string name="add_accounts">Add Accounts</string>
+    <string name="log_out">Log Out</string>
 </resources>

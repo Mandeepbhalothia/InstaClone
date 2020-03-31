@@ -47,10 +47,10 @@
 
                     <ImageButton
                         android:id="@+id/toolbar_option"
-                        android:layout_width="40dp"
-                        android:layout_height="45dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_marginEnd="16dp"
-                        android:background="@drawable/option"
+                        android:background="@drawable/ic_option"
                         android:visibility="visible"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -61,6 +61,194 @@
             </androidx.appcompat.widget.Toolbar>
 
         </com.google.android.material.appbar.AppBarLayout>
+
+        <!--scroll view-->
+        <androidx.core.widget.NestedScrollView
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/app_bar_height"
+            android:paddingTop="10dp"
+            android:isScrollContainer="true"
+            android:fillViewport="true">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <!--user profile image-->
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/userIV"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="24dp"
+                    android:src="@drawable/ic_person"
+                    app:civ_border_color="@color/gray"
+                    app:civ_border_width="1dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+                <!--no of posts-->
+                <TextView
+                    android:id="@+id/postCountTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginBottom="20dp"
+                    android:paddingStart="4dp"
+                    android:paddingEnd="4dp"
+                    android:text="20"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@id/userIV"
+                    app:layout_constraintStart_toEndOf="@id/userIV"
+                    app:layout_constraintTop_toTopOf="@+id/userIV" />
+                <!--no of followers-->
+                <TextView
+                    android:id="@+id/followersCountTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="4dp"
+                    android:paddingEnd="4dp"
+                    android:text="249"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@id/postCountTv"
+                    app:layout_constraintEnd_toStartOf="@id/followingCountTv"
+                    app:layout_constraintStart_toEndOf="@id/postCountTv"
+                    app:layout_constraintTop_toTopOf="@+id/postCountTv" />
+                <!--no of followings-->
+                <TextView
+                    android:id="@+id/followingCountTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="4dp"
+                    android:paddingEnd="4dp"
+                    android:text="157"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@id/followersCountTv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/followersCountTv"
+                    app:layout_constraintTop_toTopOf="@+id/followersCountTv" />
+                <!--barrier for variable values-->
+                <androidx.constraintlayout.widget.Barrier
+                    android:id="@+id/postCountBarrier"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:barrierDirection="bottom"
+                    app:constraint_referenced_ids="postCountTv,followersCountTv,followingCountTv" />
+                <!--no of posts-->
+                <TextView
+                    android:id="@+id/postTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Posts"
+                    android:textSize="@dimen/text_size"
+                    app:layout_constraintEnd_toEndOf="@id/postCountTv"
+                    app:layout_constraintStart_toStartOf="@id/postCountTv"
+                    app:layout_constraintTop_toBottomOf="@+id/postCountBarrier" />
+                <!--no of followers-->
+                <TextView
+                    android:id="@+id/followersTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Followers"
+                    android:textSize="@dimen/text_size"
+                    app:layout_constraintEnd_toEndOf="@id/followersCountTv"
+                    app:layout_constraintStart_toStartOf="@id/followersCountTv"
+                    app:layout_constraintTop_toBottomOf="@+id/postCountBarrier" />
+                <!--no of followings-->
+                <TextView
+                    android:id="@+id/followingTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Following"
+                    android:textSize="@dimen/text_size"
+                    app:layout_constraintEnd_toEndOf="@id/followingCountTv"
+                    app:layout_constraintStart_toStartOf="@id/followingCountTv"
+                    app:layout_constraintTop_toBottomOf="@+id/postCountBarrier" />
+                <!--barrier for variable and image-->
+                <androidx.constraintlayout.widget.Barrier
+                    android:id="@+id/postBarrier"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:barrierDirection="bottom"
+                    app:constraint_referenced_ids="postCountTv,followersTv,followingTv,userIV" />
+                <!--custom user name-->
+                <TextView
+                    android:id="@+id/userCustomIdTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="16dp"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
+                    android:text="Mandeep"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@id/userIV"
+                    app:layout_constraintTop_toBottomOf="@id/postBarrier" />
+                <!--bio-->
+                <TextView
+                    android:id="@+id/userBioTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center_vertical"
+                    android:text="This is my bio"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size"
+                    app:layout_constraintStart_toStartOf="@id/userCustomIdTv"
+                    app:layout_constraintTop_toBottomOf="@id/userCustomIdTv" />
+                <!--edit profile-->
+                <Button
+                    android:id="@+id/editProfileBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:background="@drawable/gray_stroke_bg"
+                    android:text="Edit Profile"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/text_size"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/userBioTv" />
+                <!--separator-->
+                <View
+                    android:id="@+id/separatorView"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/gray"
+                    app:layout_constraintTop_toBottomOf="@id/editProfileBtn" />
+                <!--tab layout-->
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/profileTabLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/app_bar_height"
+                    android:background="@color/white"
+                    app:layout_constraintTop_toBottomOf="@id/separatorView"
+                    app:tabIndicatorColor="@color/black"
+                    app:tabIndicatorHeight="2dp" />
+                <!--view pager-->
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/profileViewPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/profileTabLayout" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -77,19 +265,20 @@
             android:id="@+id/nav_user_name_tv"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
+            android:ellipsize="end"
             android:gravity="center_vertical"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
-            android:ellipsize="end"
             android:text="@string/mandeep_bhalothia"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size"
             android:textStyle="bold" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_below="@id/nav_user_name_tv"
-            android:background="@color/gray"/>
+            android:background="@color/gray" />
 
         <LinearLayout
             android:layout_width="match_parent"
