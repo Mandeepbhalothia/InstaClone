@@ -4,6 +4,11 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
 
+    viewBinding {
+        enabled = true
+    }
+
+
     defaultConfig {
         applicationId "com.example.instaclone"
         minSdkVersion 21
@@ -34,4 +39,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'com.google.android.material:material:1.1.0'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    // universal image loader
+    implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
 }

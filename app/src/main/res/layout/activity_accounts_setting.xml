@@ -4,57 +4,68 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".profile.AccountsSetting">
+    tools:context=".profile.AccountsSettingActivity">
+
+
+    <!--fragment container-->
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/account_setting_viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!--toolbar-->
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/accountsAppBar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/app_bar_height"
+        android:background="@color/white"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/accountsToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:id="@+id/accountsBackButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_back" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:text="@string/settings"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="@dimen/app_bar_height"
+        android:layout_height="0dp"
         android:fillViewport="true"
-        android:isScrollContainer="true">
+        android:isScrollContainer="true"
+        app:layout_constraintBottom_toTopOf="@id/accounts_bottom_nav_view"
+        app:layout_constraintTop_toBottomOf="@id/accountsAppBar">
 
-
+        <!--all content-->
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/mainConstraintLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
-            <!--toolbar-->
-            <com.google.android.material.appbar.AppBarLayout
-                android:id="@+id/accountsAppBar"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/app_bar_height"
-                android:background="@color/white"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/accountsToolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <ImageButton
-                        android:id="@+id/accountsBackButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/ic_back" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingStart="16dp"
-                        android:text="Settings"
-                        android:textColor="@color/black"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-                </androidx.appcompat.widget.Toolbar>
-
-            </com.google.android.material.appbar.AppBarLayout>
 
             <!--options-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintTop_toBottomOf="@id/accountsAppBar">
+                app:layout_constraintTop_toTopOf="parent">
 
                 <!--follow and invite friends-->
                 <LinearLayout
@@ -68,9 +79,9 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
                         android:paddingStart="16dp"
                         android:paddingEnd="16dp"
-                        android:layout_gravity="center_vertical"
                         android:src="@drawable/ic_person_add" />
 
                     <TextView
@@ -96,9 +107,9 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
                         android:paddingStart="16dp"
                         android:paddingEnd="16dp"
-                        android:layout_gravity="center_vertical"
                         android:src="@drawable/ic_notifications" />
 
                     <TextView
@@ -124,9 +135,9 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
                         android:paddingStart="16dp"
                         android:paddingEnd="16dp"
-                        android:layout_gravity="center_vertical"
                         android:src="@drawable/ic_privacy" />
 
                     <TextView
@@ -152,9 +163,9 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
                         android:paddingStart="16dp"
                         android:paddingEnd="16dp"
-                        android:layout_gravity="center_vertical"
                         android:src="@drawable/ic_security" />
 
                     <TextView
@@ -180,9 +191,9 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
                         android:paddingStart="16dp"
                         android:paddingEnd="16dp"
-                        android:layout_gravity="center_vertical"
                         android:src="@drawable/ic_ads" />
 
                     <TextView
@@ -208,12 +219,13 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
                         android:paddingStart="16dp"
                         android:paddingEnd="16dp"
-                        android:layout_gravity="center_vertical"
                         android:src="@drawable/ic_account_" />
 
                     <TextView
+                        android:id="@+id/accountTv"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:ellipsize="end"
@@ -236,9 +248,9 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
                         android:paddingStart="16dp"
                         android:paddingEnd="16dp"
-                        android:layout_gravity="center_vertical"
                         android:src="@drawable/ic_help" />
 
                     <TextView
@@ -264,9 +276,9 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
                         android:paddingStart="16dp"
                         android:paddingEnd="16dp"
-                        android:layout_gravity="center_vertical"
                         android:src="@drawable/ic_info" />
 
                     <TextView
@@ -284,34 +296,37 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
                     android:text="@string/logins"
                     android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginStart="8dp"
-                    android:textSize="@dimen/text_size"/>
+                    android:textSize="@dimen/text_size"
+                    android:textStyle="bold" />
 
                 <!--add accounts-->
                 <TextView
+                    android:id="@+id/addAccountsTv"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
                     android:text="@string/add_accounts"
                     android:textColor="@color/blue_light"
-                    android:textStyle="normal"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginStart="8dp"
-                    android:textSize="@dimen/text_size"/>
+                    android:textSize="@dimen/text_size"
+                    android:textStyle="normal" />
 
                 <!--log out-->
                 <TextView
+                    android:id="@+id/logOutTv"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="@dimen/app_bar_height"
                     android:text="@string/log_out"
                     android:textColor="@color/blue_light"
-                    android:textStyle="normal"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginStart="8dp"
-                    android:textSize="@dimen/text_size"/>
+                    android:textSize="@dimen/text_size"
+                    android:textStyle="normal" />
             </LinearLayout>
 
 
@@ -323,8 +338,14 @@
         android:id="@+id/accounts_bottom_nav_view"
         android:layout_width="match_parent"
         android:layout_height="@dimen/app_bar_height"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:background="@drawable/bottom_nav_bg"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/bottom_nav_menu" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/account_fragmentGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="accountsAppBar,scrollView,accounts_bottom_nav_view" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

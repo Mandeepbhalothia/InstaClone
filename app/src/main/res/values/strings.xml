@@ -22,4 +22,18 @@
     <string name="logins">Logins</string>
     <string name="add_accounts">Add Accounts</string>
     <string name="log_out">Log Out</string>
+    <string name="log_out_fragment">Log Out</string>
+    <string name="edit_profile_fragment">Edit Profile</string>
+    <string name="settings">Settings</string>
+    <string name="change_profile_photo">Change Profile Photo</string>
+    <string name="name">Name</string>
+    <string name="user_nme">User Name</string>
+    <string name="website">Website</string>
+    <string name="bio">Bio</string>
+    <string name="switch_to_professional_account">Switch to Professional Account</string>
+    <string name="profile_information">Profile Information</string>
+    <string name="email">Email</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="gender">Gender</string>
+    <string name="close_button_to_go_back">Close Button to go back</string>
 </resources>

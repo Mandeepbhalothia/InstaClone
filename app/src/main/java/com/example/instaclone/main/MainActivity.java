@@ -15,7 +15,9 @@ import com.example.instaclone.addMore.AddMoreFragment;
 import com.example.instaclone.likes.LikesFragment;
 import com.example.instaclone.profile.ProfileFragment;
 import com.example.instaclone.search.SearchFragment;
+import com.example.instaclone.utils.UniversalImageLoader;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,15 +33,15 @@ public class MainActivity extends AppCompatActivity {
 
         initViews();
 
+        initImageLoader();
+
         loadFragment(new MainFragment());
 
     }
 
-    private void loadFragment(Fragment fragment) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container, fragment);
-        fragmentTransaction.commit();
+    private void initImageLoader() {
+        UniversalImageLoader universalImageLoader = new UniversalImageLoader(this);
+        ImageLoader.getInstance().init(universalImageLoader.getConfig());
     }
 
     private void initViews() {
@@ -104,5 +106,13 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+    }
+
+
+    private void loadFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, fragment);
+        fragmentTransaction.commit();
     }
 }
