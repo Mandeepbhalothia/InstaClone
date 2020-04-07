@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -83,14 +84,24 @@ public class ProfileFragment extends Fragment {
                 }
             }
         });
-        
+
         setUpAdapter();
 
 
         settingLayout.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("RtlHardcoded")
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getContext(),AccountsSetting.class));
+                if (drawerLayout.isDrawerOpen(Gravity.RIGHT)) {
+                    drawerLayout.closeDrawer(Gravity.RIGHT);
+                }
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        startActivity(new Intent(getContext(), AccountsSetting.class));
+                    }
+                },400);
+
             }
         });
 
@@ -102,7 +113,7 @@ public class ProfileFragment extends Fragment {
         profilePagerAdapter.addFragment(new PostFragment());
         profilePagerAdapter.addFragment(new TagFragment());
         profileViewPager.setAdapter(profilePagerAdapter);
-        profileTabLayout.setupWithViewPager(profileViewPager,true);
+        profileTabLayout.setupWithViewPager(profileViewPager, true);
         Objects.requireNonNull(profileTabLayout.getTabAt(0)).setIcon(R.drawable.ic_grid);
         Objects.requireNonNull(profileTabLayout.getTabAt(1)).setIcon(R.drawable.ic_tag);
         profileViewPager.setScrollX(500);

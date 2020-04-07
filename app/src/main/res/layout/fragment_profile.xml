@@ -83,7 +83,7 @@
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="24dp"
-                    android:src="@drawable/ic_person"
+                    android:src="@drawable/profile_pic"
                     app:civ_border_color="@color/gray"
                     app:civ_border_width="1dp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -93,16 +93,14 @@
                     android:id="@+id/postCountTv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="40dp"
                     android:layout_marginBottom="20dp"
-                    android:paddingStart="4dp"
-                    android:paddingEnd="4dp"
                     android:text="20"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@id/userIV"
-                    app:layout_constraintStart_toEndOf="@id/userIV"
+                    app:layout_constraintStart_toStartOf="@id/postTv"
+                    app:layout_constraintEnd_toEndOf="@id/postTv"
                     app:layout_constraintTop_toTopOf="@+id/userIV" />
                 <!--no of followers-->
                 <TextView
@@ -116,8 +114,8 @@
                     android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@id/postCountTv"
-                    app:layout_constraintEnd_toStartOf="@id/followingCountTv"
-                    app:layout_constraintStart_toEndOf="@id/postCountTv"
+                    app:layout_constraintStart_toStartOf="@id/followersTv"
+                    app:layout_constraintEnd_toEndOf="@id/followersTv"
                     app:layout_constraintTop_toTopOf="@+id/postCountTv" />
                 <!--no of followings-->
                 <TextView
@@ -131,8 +129,8 @@
                     android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@id/followersCountTv"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/followersCountTv"
+                    app:layout_constraintStart_toStartOf="@id/followingTv"
+                    app:layout_constraintEnd_toEndOf="@id/followingTv"
                     app:layout_constraintTop_toTopOf="@+id/followersCountTv" />
                 <!--barrier for variable values-->
                 <androidx.constraintlayout.widget.Barrier
@@ -148,28 +146,37 @@
                     android:layout_height="wrap_content"
                     android:text="Posts"
                     android:textSize="@dimen/text_size"
-                    app:layout_constraintEnd_toEndOf="@id/postCountTv"
-                    app:layout_constraintStart_toStartOf="@id/postCountTv"
+                    android:paddingStart="4dp"
+                    android:paddingEnd="4dp"
+                    android:gravity="center"
+                    app:layout_constraintStart_toEndOf="@id/userIV"
+                    app:layout_constraintEnd_toStartOf="@id/followersCountTv"
                     app:layout_constraintTop_toBottomOf="@+id/postCountBarrier" />
                 <!--no of followers-->
                 <TextView
                     android:id="@+id/followersTv"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="Followers"
+                    android:paddingStart="4dp"
+                    android:paddingEnd="4dp"
+                    android:gravity="center"
                     android:textSize="@dimen/text_size"
-                    app:layout_constraintEnd_toEndOf="@id/followersCountTv"
-                    app:layout_constraintStart_toStartOf="@id/followersCountTv"
+                    app:layout_constraintEnd_toStartOf="@id/followingTv"
+                    app:layout_constraintStart_toEndOf="@id/postTv"
                     app:layout_constraintTop_toBottomOf="@+id/postCountBarrier" />
                 <!--no of followings-->
                 <TextView
                     android:id="@+id/followingTv"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="Following"
+                    android:paddingStart="4dp"
+                    android:paddingEnd="4dp"
+                    android:gravity="center"
                     android:textSize="@dimen/text_size"
-                    app:layout_constraintEnd_toEndOf="@id/followingCountTv"
-                    app:layout_constraintStart_toStartOf="@id/followingCountTv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/followersTv"
                     app:layout_constraintTop_toBottomOf="@+id/postCountBarrier" />
                 <!--barrier for variable and image-->
                 <androidx.constraintlayout.widget.Barrier
