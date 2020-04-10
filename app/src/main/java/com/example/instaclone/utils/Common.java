@@ -1,5 +1,6 @@
 package com.example.instaclone.utils;
 
+import android.text.Editable;
 import android.view.View;
 import android.widget.ProgressBar;
 
@@ -16,5 +17,15 @@ public class Common {
             progressBar.setVisibility(View.GONE);
         }
     }
+
+
+    public boolean isStringNull(String string) {
+        return string.equals("");
+    }
+
+    public boolean isEditableNull(Editable editable) {
+        return editable == null;
+    }
+
 
 }

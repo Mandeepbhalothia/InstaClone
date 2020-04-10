@@ -36,4 +36,18 @@
     <string name="phone_number">Phone Number</string>
     <string name="gender">Gender</string>
     <string name="close_button_to_go_back">Close Button to go back</string>
+    <string name="insta_logo_desc">Insta logo</string>
+    <string name="login">Login</string>
+    <string name="no_account_yet_create_one">No account yet ? Create One</string>
+    <string name="password">Password</string>
+    <string name="register_a_new_account">Register A New Account</string>
+    <string name="full_name">Full Name</string>
+    <string name="register">Register</string>
+    <string name="auth_success">Authentication Succussfull</string>
+    <string name="auth_failed">Authentication Failed</string>
+    <string name="users">users</string>
+    <string name="username">username</string>
+    <string name="user_account_settings">user_account_settings</string>
+    <string name="sending_email_verification_mail">Verification Mail sent to your email. Please verify.</string>
+    <string name="check_verification_mail">Please check your inbox and verify email first</string>
 </resources>

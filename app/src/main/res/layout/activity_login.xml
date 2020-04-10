@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:isScrollContainer="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".login.LoginActivity"
+        android:paddingBottom="@dimen/app_bar_height">
+
+        <!--progress bar-->
+        <ProgressBar
+            android:id="@+id/progressBarLogin"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:elevation="8dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!--logo-->
+        <ImageView
+            android:id="@+id/logoLogin"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginTop="24dp"
+            android:contentDescription="@string/insta_logo_desc"
+            android:src="@drawable/insta_logo"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!--email-->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/emailLoginTl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/logoLogin">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/emailLoginEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/email"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!--password-->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/passwordLoginTl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/emailLoginTl"
+            app:passwordToggleEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/passwordLoginEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!--login btn-->
+        <Button
+            android:id="@+id/loginBtn"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height"
+            android:layout_margin="16dp"
+            android:background="@drawable/login_btn_bg"
+            android:text="@string/login"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size"
+            app:layout_constraintTop_toBottomOf="@id/passwordLoginTl" />
+
+        <!--sign up tv-->
+        <TextView
+            android:id="@+id/signUpTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:gravity="center"
+            android:text="@string/no_account_yet_create_one"
+            android:textColor="@color/blue_light"
+            android:textSize="@dimen/text_size"
+            app:layout_constraintTop_toBottomOf="@id/loginBtn" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
