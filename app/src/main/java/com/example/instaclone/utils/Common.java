@@ -53,35 +53,20 @@ public class Common {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.homeMenu:
-                        if (lasTSelectedMenu != item) {
-                            lasTSelectedMenu = item;
-                            context.startActivity(new Intent(context, HomeActivity.class));
-                            break;
-                        }
+                        context.startActivity(new Intent(context, HomeActivity.class));
+                        break;
                     case R.id.searchMenu:
-                        if (lasTSelectedMenu != item) {
-                            lasTSelectedMenu = item;
-                            context.startActivity(new Intent(context, SearchActivity.class));
-                            break;
-                        }
+                        context.startActivity(new Intent(context, SearchActivity.class));
+                        break;
                     case R.id.addMenu:
-                        if (lasTSelectedMenu != item) {
-                            lasTSelectedMenu = item;
-                            context.startActivity(new Intent(context, AddMoreActivity.class));
-                            break;
-                        }
+                        context.startActivity(new Intent(context, AddMoreActivity.class));
+                        break;
                     case R.id.likeMenu:
-                        if (lasTSelectedMenu != item) {
-                            lasTSelectedMenu = item;
-                            context.startActivity(new Intent(context, LikesActivity.class));
-                            break;
-                        }
+                        context.startActivity(new Intent(context, LikesActivity.class));
+                        break;
                     case R.id.profileMenu:
-                        if (lasTSelectedMenu != item) {
-                            lasTSelectedMenu = item;
-                            context.startActivity(new Intent(context, ProfileActivity.class));
-                            break;
-                        }
+                        context.startActivity(new Intent(context, ProfileActivity.class));
+                        break;
                 }
 
                 return true;
