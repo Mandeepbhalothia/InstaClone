@@ -15,7 +15,7 @@ import com.example.instaclone.utils.FireBaseMethods;
 public class LoginActivity extends AppCompatActivity {
 
     ActivityLoginBinding binding;
-    Common common = new Common();
+    Common common;
     FireBaseMethods fireBaseMethods;
 
     @Override
@@ -24,6 +24,7 @@ public class LoginActivity extends AppCompatActivity {
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        common = new Common(this);
         fireBaseMethods = new FireBaseMethods(this);
 
         binding.loginBtn.setOnClickListener(new View.OnClickListener() {

@@ -5,12 +5,22 @@ public class User {
     private String phone_number;
     private String user_Id;
     private String username;
+    private String gender;
 
-    public User(String email, String phone_number, String user_Id, String username) {
+    public User(String email, String phone_number, String user_Id, String username, String gender) {
         this.email = email;
         this.phone_number = phone_number;
         this.user_Id = user_Id;
         this.username = username;
+        this.gender = gender;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public User() {

@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import com.example.instaclone.R;
 import com.example.instaclone.main.MainActivity;
 import com.example.instaclone.model.User;
+import com.example.instaclone.model.UserAccountDetails;
 import com.example.instaclone.model.UserSetting;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -28,6 +29,9 @@ import static com.example.instaclone.utils.Common.showProgressBar;
 public class FireBaseMethods {
     private Context context;
     private FirebaseAuth mAuth;
+    private User user;
+    private UserSetting userSetting;
+    private boolean isUserFetched, isUserSettingFetched;
 
     public FireBaseMethods(Context context) {
         this.context = context;
@@ -46,7 +50,7 @@ public class FireBaseMethods {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     FirebaseUser currentUser = mAuth.getCurrentUser();
-                    if (currentUser!=null) {
+                    if (currentUser != null) {
                         if (currentUser.isEmailVerified()) {
                             hideProgressBar(progressBar);
                             Toast.makeText(context, context.getString(R.string.auth_success), Toast.LENGTH_SHORT).show();
@@ -63,14 +67,14 @@ public class FireBaseMethods {
                     }
                 } else {
                     hideProgressBar(progressBar);
-                    Toast.makeText(context, context.getString(R.string.auth_failed)+task.getException(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, context.getString(R.string.auth_failed) + task.getException(), Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
 
     public void registerUser(final String email, final String password, final String username, final String fullName,
-                             final String phoneNumber,final ProgressBar progressBar, final DatabaseReference dbRef) {
+                             final String phoneNumber, final String gender, final ProgressBar progressBar, final DatabaseReference dbRef) {
         showProgressBar(progressBar);
         // first check userName is already available or not
         dbRef.child(context.getString(R.string.users)).orderByChild(context.getString(R.string.username)).equalTo(username)
@@ -83,7 +87,7 @@ public class FireBaseMethods {
                                                                     Toast.LENGTH_SHORT).show();
                                                             return;
                                                         }
-                                                        proceedRegister(email, password, username, fullName,phoneNumber, progressBar, dbRef);
+                                                        proceedRegister(email, password, username, fullName, phoneNumber, gender, progressBar, dbRef);
                                                     }
 
                                                     @Override
@@ -95,7 +99,7 @@ public class FireBaseMethods {
     }
 
     private void proceedRegister(final String email, String password, final String username, final String fullName, final String phoneNumber,
-                                 final ProgressBar progressBar, final DatabaseReference dbRef) {
+                                 final String gender, final ProgressBar progressBar, final DatabaseReference dbRef) {
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener((Activity) context, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -104,12 +108,12 @@ public class FireBaseMethods {
                     if (currentUser != null) {
                         hideProgressBar(progressBar);
                         // save to db
-                        final User user = new User(email, phoneNumber, currentUser.getUid(), username );
-                        final UserSetting userSetting = new UserSetting("","","",username,"0","0","0",fullName);
+                        final User user = new User(email, phoneNumber, currentUser.getUid(), username, gender);
+                        final UserSetting userSetting = new UserSetting("", "", "", username, "0", "0", "0", fullName);
                         currentUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
-                                if (task.isSuccessful()){
+                                if (task.isSuccessful()) {
                                     saveDataToDb(user, dbRef, userSetting);
                                     Toast.makeText(context, context.getString(R.string.sending_email_verification_mail), Toast.LENGTH_LONG).show();
                                     mAuth.signOut();

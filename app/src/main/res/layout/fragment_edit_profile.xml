@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".profile.EditProfileFragment">
 
+    <ProgressBar
+        android:id="@+id/editProfileProgressbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <!--toolbar-->
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/editProfileAppBar"
@@ -28,10 +38,10 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:background="@drawable/ic_close_black"
+                    android:contentDescription="@string/close_button_to_go_back"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:contentDescription="@string/close_button_to_go_back"/>
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -55,10 +65,10 @@
                     android:layout_height="30dp"
                     android:layout_marginEnd="16dp"
                     android:background="@drawable/ic_done_blue"
+                    android:contentDescription="@string/close_button_to_go_back"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:contentDescription="@string/close_button_to_go_back"/>
+                    app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -70,10 +80,10 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editProfileAppBar"
         android:fillViewport="true"
-        android:isScrollContainer="true">
+        android:isScrollContainer="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editProfileAppBar">
 
         <!--main layout-->
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -86,32 +96,32 @@
                 android:id="@+id/editProfileUserImageView"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="16dp"
                 android:src="@drawable/profile_pic"
-                android:layout_marginTop="16dp"/>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <!--changeProfilePhotoTv-->
             <TextView
                 android:id="@+id/changeProfilePhotoTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/change_profile_photo"
-                android:textSize="18sp"
-                android:textColor="@color/blue_light"
                 android:layout_marginTop="16dp"
-                app:layout_constraintTop_toBottomOf="@id/editProfileUserImageView"
+                android:text="@string/change_profile_photo"
+                android:textColor="@color/blue_light"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@id/editProfileUserImageView"
                 app:layout_constraintStart_toStartOf="@id/editProfileUserImageView"
-                app:layout_constraintEnd_toEndOf="@id/editProfileUserImageView"/>
+                app:layout_constraintTop_toBottomOf="@id/editProfileUserImageView" />
 
             <!--name-->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/nameTL"
-                app:layout_constraintTop_toBottomOf="@+id/changeProfilePhotoTv"
-                android:layout_margin="16dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/changeProfilePhotoTv">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/nameEt"
@@ -123,10 +133,10 @@
             <!--user name-->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/userNameTL"
-                app:layout_constraintTop_toBottomOf="@+id/nameTL"
-                android:layout_margin="16dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/nameTL">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/userNameEt"
@@ -138,10 +148,10 @@
             <!--website-->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/websiteTL"
-                app:layout_constraintTop_toBottomOf="@+id/userNameTL"
-                android:layout_margin="16dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/userNameTL">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/websiteEt"
@@ -153,10 +163,10 @@
             <!--Bio-->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/bioTL"
-                app:layout_constraintTop_toBottomOf="@+id/websiteTL"
-                android:layout_margin="16dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/websiteTL">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/bioEt"
@@ -170,54 +180,56 @@
                 android:id="@+id/viewTop"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                app:layout_constraintTop_toBottomOf="@+id/bioTL"
                 android:layout_marginTop="16dp"
-                android:background="@color/gray"/>
+                android:background="@color/gray"
+                app:layout_constraintTop_toBottomOf="@+id/bioTL" />
+
             <TextView
                 android:id="@+id/switchToProfessionalAccountTv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/viewTop"
-                android:text="@string/switch_to_professional_account"
-                android:textColor="@color/blue_light"
-                android:textSize="18sp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:paddingTop="8dp"
-                android:paddingBottom="8dp"/>
+                android:paddingBottom="8dp"
+                android:text="@string/switch_to_professional_account"
+                android:textColor="@color/blue_light"
+                android:textSize="18sp"
+                app:layout_constraintTop_toBottomOf="@id/viewTop" />
+
             <View
                 android:id="@+id/viewBottom"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                app:layout_constraintTop_toBottomOf="@+id/switchToProfessionalAccountTv"
-                android:background="@color/gray"/>
+                android:background="@color/gray"
+                app:layout_constraintTop_toBottomOf="@+id/switchToProfessionalAccountTv" />
 
             <!--profile information-->
             <View
                 android:id="@+id/viewTopProfileInfo"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                app:layout_constraintTop_toBottomOf="@+id/viewBottom"
                 android:layout_marginTop="8dp"
-                android:background="@color/gray"/>
+                android:background="@color/gray"
+                app:layout_constraintTop_toBottomOf="@+id/viewBottom" />
             <!--profile info static-->
             <TextView
                 android:id="@+id/profileInformationStatic"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/viewTopProfileInfo"
                 android:layout_margin="16dp"
                 android:text="@string/profile_information"
+                android:textColor="@color/black"
                 android:textSize="18sp"
-                android:textColor="@color/black"/>
+                app:layout_constraintTop_toBottomOf="@+id/viewTopProfileInfo" />
 
             <!--email-->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/emailTL"
-                app:layout_constraintTop_toBottomOf="@+id/profileInformationStatic"
-                android:layout_margin="16dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/profileInformationStatic">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/emailEt"
@@ -229,10 +241,10 @@
             <!--phoneNo-->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/phoneNoTL"
-                app:layout_constraintTop_toBottomOf="@+id/emailTL"
-                android:layout_margin="16dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/emailTL">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/phoneNoEt"
@@ -245,10 +257,10 @@
             <!--email-->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/genderTL"
-                app:layout_constraintTop_toBottomOf="@+id/phoneNoTL"
-                android:layout_margin="16dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/phoneNoTL">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/genderEt"

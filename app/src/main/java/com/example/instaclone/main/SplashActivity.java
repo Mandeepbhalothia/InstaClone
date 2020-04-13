@@ -9,7 +9,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.instaclone.databinding.ActivitySplashBinding;
 import com.example.instaclone.login.LoginActivity;
 import com.example.instaclone.utils.FireBaseMethods;
+import com.example.instaclone.utils.UniversalImageLoader;
 import com.google.firebase.auth.FirebaseUser;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -23,8 +25,16 @@ public class SplashActivity extends AppCompatActivity {
         binding = ActivitySplashBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        initImageLoader();
+
         fireBaseMethods = new FireBaseMethods(this);
 
+    }
+
+    /*init universal loader*/
+    private void initImageLoader() {
+        UniversalImageLoader universalImageLoader = new UniversalImageLoader(this);
+        ImageLoader.getInstance().init(universalImageLoader.getConfig());
     }
 
     /*...............firebase...............*/
@@ -38,7 +48,7 @@ public class SplashActivity extends AppCompatActivity {
                 if (currentUser == null) {// user is not signed in
                     startActivity(new Intent(SplashActivity.this, LoginActivity.class));
                 } else {
-                    startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                    startActivity(new Intent(SplashActivity.this, HomeActivity.class));
                 }
                 finish();
             }

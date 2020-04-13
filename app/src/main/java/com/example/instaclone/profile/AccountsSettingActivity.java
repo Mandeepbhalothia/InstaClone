@@ -6,6 +6,7 @@ import androidx.constraintlayout.widget.Group;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -33,6 +34,8 @@ public class AccountsSettingActivity extends AppCompatActivity {
 
         setUpPagerAdapter();
 
+        // we can directly load edit profile fragment
+        checkIntentData();
 
         bottomNavigationView.setSelectedItemId(R.id.profileMenu);
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -58,13 +61,20 @@ public class AccountsSettingActivity extends AppCompatActivity {
 
     }
 
+    private void checkIntentData() {
+        Intent intent = getIntent();
+        if (intent != null && intent.hasExtra(getString(R.string.calling_activity))) {
+            setViewPager(intent.getStringExtra(getString(R.string.calling_activity)));
+        }
+    }
+
     private void setUpPagerAdapter() {
         sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
-        sectionsPagerAdapter.addFragment(new EditProfileFragment(),getString(R.string.edit_profile_fragment));// fragment 0
+        sectionsPagerAdapter.addFragment(new EditProfileFragment(), getString(R.string.edit_profile_fragment));// fragment 0
         sectionsPagerAdapter.addFragment(new LogOutFragment(), getString(R.string.log_out_fragment));// fragment 1
     }
 
-    private void setViewPager(String fragmentName){
+    private void setViewPager(String fragmentName) {
         mainLayoutGroup.setVisibility(View.GONE);
         viewPager.setAdapter(sectionsPagerAdapter);
         viewPager.setCurrentItem(sectionsPagerAdapter.getFragmentNumber(fragmentName));

@@ -1,5 +1,6 @@
 package com.example.instaclone.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
@@ -11,10 +12,11 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.instaclone.R;
-import com.example.instaclone.addMore.AddMoreFragment;
+import com.example.instaclone.addMore.AddMoreActivity;
 import com.example.instaclone.likes.LikesFragment;
 import com.example.instaclone.profile.ProfileFragment;
 import com.example.instaclone.search.SearchFragment;
+import com.example.instaclone.utils.Common;
 import com.example.instaclone.utils.UniversalImageLoader;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -23,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
     FrameLayout fragmentContainer;
     public static BottomNavigationView bottomNavigationView;
+    private static int ACTIVITY_NO = 0;
     MenuItem lasTSelectedMenu;
     Fragment mainFragment, searchFragment, addMoreFragment, likesFragment, profileFragment;
 
@@ -35,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
         initImageLoader();
 
-        loadFragment(new MainFragment());
+        /*oadFragment(new MainFragment());*/
 
     }
 
@@ -48,10 +51,9 @@ public class MainActivity extends AppCompatActivity {
         fragmentContainer = findViewById(R.id.fragment_container);
         bottomNavigationView = findViewById(R.id.bottom_nav_view);
 
-        // last selected menuItem
-        lasTSelectedMenu = bottomNavigationView.getMenu().getItem(0);
         // load different fragment on item selected
-        initBottomNavListener();
+        bottomNavigationView.setSelectedItemId(bottomNavigationView.getMenu().getItem(ACTIVITY_NO).getItemId());
+        new Common(this).initBottomNavListener(bottomNavigationView);
 
     }
 
@@ -64,9 +66,10 @@ public class MainActivity extends AppCompatActivity {
                         if (lasTSelectedMenu != item) {
                             // to always start home fragment
 //                            if (mainFragment==null)
-                            mainFragment = new MainFragment();
+                            /*mainFragment = new MainFragment();
                             loadFragment(mainFragment);
-                            lasTSelectedMenu = item;
+                            lasTSelectedMenu = item;*/
+                            startActivity(new Intent(MainActivity.this, HomeActivity.class));
                             break;
                         }
                     case R.id.searchMenu:
@@ -79,10 +82,8 @@ public class MainActivity extends AppCompatActivity {
                         }
                     case R.id.addMenu:
                         if (lasTSelectedMenu != item) {
-                            if (addMoreFragment == null)
-                                addMoreFragment = new AddMoreFragment();
-                            loadFragment(addMoreFragment);
                             lasTSelectedMenu = item;
+                            startActivity(new Intent(MainActivity.this, AddMoreActivity.class));
                             break;
                         }
                     case R.id.likeMenu:

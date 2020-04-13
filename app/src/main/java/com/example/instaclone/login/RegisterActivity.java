@@ -17,7 +17,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     ActivityRegisterBinding binding;
     FireBaseMethods fireBaseMethods;
-    Common common = new Common();
+    Common common;
     DatabaseReference dbRef;
 
     @Override
@@ -26,6 +26,7 @@ public class RegisterActivity extends AppCompatActivity {
         binding = ActivityRegisterBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        common = new Common(this);
         fireBaseMethods = new FireBaseMethods(this);
 
         binding.registerBtn.setOnClickListener(new View.OnClickListener() {
@@ -34,7 +35,7 @@ public class RegisterActivity extends AppCompatActivity {
                 Editable email = binding.emailRegisterEt.getText();
                 Editable password = binding.passwordRegisterEt.getText();
                 Editable userName = binding.userNameRegisterEt.getText();
-                Editable fullName = binding.userNameRegisterEt.getText();
+                Editable fullName = binding.fullNameRegisterEt.getText();
 
                 if (common.isEditableNull(email) || common.isEditableNull(password) || common.isEditableNull(userName) || common.isEditableNull(fullName)) {
                     Toast.makeText(RegisterActivity.this, "Null parameter is not accepted", Toast.LENGTH_SHORT).show();
@@ -50,7 +51,7 @@ public class RegisterActivity extends AppCompatActivity {
                     return;
                 }
                 dbRef = FirebaseDatabase.getInstance().getReference();
-                fireBaseMethods.registerUser(email.toString(), password.toString(), userName.toString(), fullName.toString(), "",
+                fireBaseMethods.registerUser(email.toString(), password.toString(), userName.toString(), fullName.toString(), "","",
                         binding.progressBarRegister, dbRef);
 
             }

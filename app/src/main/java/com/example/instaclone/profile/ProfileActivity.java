@@ -6,9 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -21,17 +19,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.instaclone.R;
-import com.example.instaclone.model.User;
-import com.example.instaclone.model.UserAccountDetails;
 import com.example.instaclone.model.UserSetting;
+import com.example.instaclone.utils.Common;
 import com.example.instaclone.utils.UniversalImageLoader;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -43,49 +38,44 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.Objects;
 
-public class ProfileFragment extends Fragment {
+public class ProfileActivity extends AppCompatActivity {
 
     private TextView userNameTv, userDisplayNameTv, descriptionTv, followersTv, followingTv, postTv;
     private TabLayout profileTabLayout;
     private ViewPager profileViewPager;
     private ImageView profileImageView;
 
-    public ProfileFragment() {
-        // Required empty public constructor
-    }
-
-
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_profile);
 
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
         // Toolbar not needed now
-        Toolbar toolbar = view.findViewById(R.id.profile_toolbar);
-        ((AppCompatActivity) Objects.requireNonNull(getActivity())).setSupportActionBar(toolbar);
-        userDisplayNameTv = view.findViewById(R.id.toolbar_name);
-        userNameTv = view.findViewById(R.id.userCustomIdTv);
-        descriptionTv = view.findViewById(R.id.userBioTv);
-        postTv = view.findViewById(R.id.postCountTv);
-        followingTv = view.findViewById(R.id.followingCountTv);
-        followersTv = view.findViewById(R.id.followersCountTv);
-        profileImageView = view.findViewById(R.id.userIV);
-        profileTabLayout = view.findViewById(R.id.profileTabLayout);
-        profileViewPager = view.findViewById(R.id.profileViewPager);
-        LinearLayout settingLayout = view.findViewById(R.id.nav_setting_layout);
+        Toolbar toolbar = findViewById(R.id.profile_toolbar);
+        setSupportActionBar(toolbar);
+        userDisplayNameTv = findViewById(R.id.toolbar_name);
+        userNameTv = findViewById(R.id.userCustomIdTv);
+        descriptionTv = findViewById(R.id.userBioTv);
+        postTv = findViewById(R.id.postCountTv);
+        followingTv = findViewById(R.id.followingCountTv);
+        followersTv = findViewById(R.id.followersCountTv);
+        profileImageView = findViewById(R.id.userIV);
+        profileTabLayout = findViewById(R.id.profileTabLayout);
+        profileViewPager = findViewById(R.id.profileViewPager);
+        LinearLayout settingLayout = findViewById(R.id.nav_setting_layout);
 
-        final ConstraintLayout contentLayout = view.findViewById(R.id.mainContent);
-        ImageButton toolbarOptionBtn = view.findViewById(R.id.toolbar_option);
-        final DrawerLayout drawerLayout = view.findViewById(R.id.drawerLayout);
+        /*set bottom nav bar*/
+        int ACTIVITY_NO = 4;
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav_view);
+        bottomNavigationView.setSelectedItemId(bottomNavigationView.getMenu().getItem(ACTIVITY_NO).getItemId());
+        new Common(this).initBottomNavListener(bottomNavigationView);
+
+        final ConstraintLayout contentLayout = findViewById(R.id.mainContent);
+        ImageButton toolbarOptionBtn = findViewById(R.id.toolbar_option);
+        final DrawerLayout drawerLayout = findViewById(R.id.drawerLayout);
         drawerLayout.setScrimColor(Color.TRANSPARENT);
-        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(getActivity(), drawerLayout, toolbar, R.string.open_drawer, R.string.close_drawer) {
+        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_drawer, R.string.close_drawer) {
             @Override
             public void onDrawerSlide(View drawerView, float slideOffset) {
                 super.onDrawerSlide(drawerView, slideOffset);
@@ -124,27 +114,26 @@ public class ProfileFragment extends Fragment {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        startActivity(new Intent(getContext(), AccountsSettingActivity.class));
+                        startActivity(new Intent(ProfileActivity.this, AccountsSettingActivity.class));
                     }
                 }, 400);
 
             }
         });
 
-        view.findViewById(R.id.editProfileBtn).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.editProfileBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(),AccountsSettingActivity.class);
-                intent.putExtra(getString(R.string.calling_activity),getString(R.string.edit_profile_fragment));
+                Intent intent = new Intent(ProfileActivity.this, AccountsSettingActivity.class);
+                intent.putExtra(getString(R.string.calling_activity), getString(R.string.edit_profile_fragment));
                 startActivity(intent);
             }
         });
 
-        return view;
     }
 
     private void setUpAdapter() {
-        ProfilePagerAdapter profilePagerAdapter = new ProfilePagerAdapter(getChildFragmentManager(), FragmentPagerAdapter.POSITION_UNCHANGED);
+        ProfilePagerAdapter profilePagerAdapter = new ProfilePagerAdapter(getSupportFragmentManager(), FragmentPagerAdapter.POSITION_UNCHANGED);
         profilePagerAdapter.addFragment(new PostFragment());
         profilePagerAdapter.addFragment(new TagFragment());
         profileViewPager.setAdapter(profilePagerAdapter);
@@ -155,7 +144,7 @@ public class ProfileFragment extends Fragment {
 
     }
 
-    private void updateProfileWidgets(UserSetting userSetting){
+    private void updateProfileWidgets(UserSetting userSetting) {
         UniversalImageLoader.setImage(userSetting.getProfile_photo(), profileImageView, null, "");
         userDisplayNameTv.setText(userSetting.getDisplay_name());
         userNameTv.setText(userSetting.getUsername());
@@ -165,10 +154,10 @@ public class ProfileFragment extends Fragment {
         followingTv.setText(userSetting.getFollowing());
     }
 
-    private void setProfileImage() {
+    /*private void setProfileImage() {
         String imgURL = "www.androidcentral.com/sites/androidcentral.com/files/styles/xlarge/public/article_images/2016/08/ac-lloyd.jpg?itok=bb72IeLf";
         UniversalImageLoader.setImage(imgURL, profileImageView, null, "https://");
-    }
+    }*/
 
     /*get user account settings from firebase*/
     private void getUserAccountDetails(final DatabaseReference databaseReference) {
@@ -182,10 +171,10 @@ public class ProfileFragment extends Fragment {
                             if (dataSnapshot.getValue() != null) {
                                 UserSetting userSetting = dataSnapshot.getValue(UserSetting.class);
                                 // update UI here full data received of current user
-                                updateProfileWidgets(userSetting);
+                                updateProfileWidgets(userSetting != null ? userSetting : new UserSetting());
 
                             } else {
-                                Toast.makeText(getContext(), R.string.data_issue, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ProfileActivity.this, R.string.data_issue, Toast.LENGTH_SHORT).show();
                             }
                         }
 
@@ -197,64 +186,4 @@ public class ProfileFragment extends Fragment {
         }
     }
 
-    /*private void initBottomNavListener() {
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.homeMenu:
-                        if (lasTSelectedMenu != item) {
-                            // to always start home fragment
-//                            if (mainFragment==null)
-                            mainFragment = new MainFragment();
-                            loadFragment(mainFragment);
-                            lasTSelectedMenu = item;
-                            break;
-                        }
-                    case R.id.searchMenu:
-                        if (lasTSelectedMenu != item) {
-                            if (searchFragment == null)
-                                searchFragment = new SearchFragment();
-                            loadFragment(searchFragment);
-                            lasTSelectedMenu = item;
-                            break;
-                        }
-                    case R.id.addMenu:
-                        if (lasTSelectedMenu != item) {
-                            if (addMoreFragment == null)
-                                addMoreFragment = new AddMoreFragment();
-                            loadFragment(addMoreFragment);
-                            lasTSelectedMenu = item;
-                            break;
-                        }
-                    case R.id.likeMenu:
-                        if (lasTSelectedMenu != item) {
-                            if (likesFragment == null)
-                                likesFragment = new LikesFragment();
-                            loadFragment(likesFragment);
-                            lasTSelectedMenu = item;
-                            break;
-                        }
-                    case R.id.profileMenu:
-                        if (lasTSelectedMenu != item) {
-                            if (profileFragment == null)
-                                profileFragment = new ProfileFragment();
-                            loadFragment(profileFragment);
-                            lasTSelectedMenu = item;
-                            break;
-                        }
-                }
-
-                return true;
-            }
-        });
-    }
-
-
-    private void loadFragment(Fragment fragment) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container, fragment);
-        fragmentTransaction.commit();
-    }*/
 }

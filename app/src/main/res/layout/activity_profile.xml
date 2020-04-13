@@ -5,12 +5,7 @@
     android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".profile.ProfileFragment">
-
-    <FrameLayout
-        android:id="@+id/editProfileContainer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+    tools:context=".profile.ProfileActivity">
 
     <!--full screen-->
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -67,20 +62,11 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <!--scroll view-->
-        <!--<androidx.core.widget.NestedScrollView
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/app_bar_height"
-            android:paddingTop="10dp"
-            android:isScrollContainer="true"
-            android:fillViewport="true">-->
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/app_bar_height"
+            android:layout_marginBottom="@dimen/app_bar_height"
             android:paddingTop="10dp">
             <!--user profile image-->
             <de.hdodenhof.circleimageview.CircleImageView
@@ -262,7 +248,13 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <!--</androidx.core.widget.NestedScrollView>-->
+        <!--bottom nav bar-->
+        <include
+            android:id="@+id/bottomNavBarProfileActivity"
+            layout="@layout/bottom_nav_bar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/app_bar_height"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

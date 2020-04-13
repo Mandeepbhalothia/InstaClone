@@ -64,7 +64,7 @@ public class MainFragment extends Fragment {
         });
     }
 
-    private void setAdapter() {
+    private void setAdapter(){
         if (getFragmentManager() == null) {
             Toast.makeText(getContext(), "Fragment Manager Is Null", Toast.LENGTH_SHORT).show();
             return;

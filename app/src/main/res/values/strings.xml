@@ -50,4 +50,7 @@
     <string name="user_account_settings">user_account_settings</string>
     <string name="sending_email_verification_mail">Verification Mail sent to your email. Please verify.</string>
     <string name="check_verification_mail">Please check your inbox and verify email first</string>
+    <string name="data_issue">Data From Server is Null</string>
+    <string name="calling_activity">calling new activity</string>
+    <string name="details_updated">Details Updated</string>
 </resources>
