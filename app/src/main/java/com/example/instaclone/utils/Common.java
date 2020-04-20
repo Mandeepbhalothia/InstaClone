@@ -1,5 +1,6 @@
 package com.example.instaclone.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.text.Editable;
@@ -51,23 +52,28 @@ public class Common {
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Intent intent = new Intent();
                 switch (item.getItemId()) {
                     case R.id.homeMenu:
-                        context.startActivity(new Intent(context, HomeActivity.class));
+                        intent = new Intent(context, HomeActivity.class);
                         break;
                     case R.id.searchMenu:
-                        context.startActivity(new Intent(context, SearchActivity.class));
+                        intent = new Intent(context, SearchActivity.class);
                         break;
                     case R.id.addMenu:
-                        context.startActivity(new Intent(context, AddMoreActivity.class));
+                        intent = new Intent(context, AddMoreActivity.class);
                         break;
                     case R.id.likeMenu:
-                        context.startActivity(new Intent(context, LikesActivity.class));
+                        intent = new Intent(context, LikesActivity.class);
                         break;
                     case R.id.profileMenu:
-                        context.startActivity(new Intent(context, ProfileActivity.class));
+                        intent = new Intent(context, ProfileActivity.class);
                         break;
+                    default:
+                        throw new IllegalStateException("Unexpected value: " + item.getItemId());
                 }
+                context.startActivity(intent);
+                ((Activity)context).finish();
 
                 return true;
             }

@@ -1,10 +1,9 @@
 package com.example.instaclone.search;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 
-import com.example.instaclone.R;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.instaclone.databinding.ActivitySearchBinding;
 import com.example.instaclone.utils.Common;
 import com.google.android.material.bottomnavigation.BottomNavigationView;

@@ -6,4 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".addMore.AddMoreActivity">
 
+    <include
+        android:id="@+id/viewPagerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        layout="@layout/view_pager"
+        android:layout_marginBottom="@dimen/app_bar_height"/>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/addMoreTabLayout"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/app_bar_height"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

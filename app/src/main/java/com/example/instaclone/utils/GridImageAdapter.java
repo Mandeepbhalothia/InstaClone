@@ -33,7 +33,7 @@ public class GridImageAdapter extends ArrayAdapter<String> {
         super(context, layout, urlList);
         this.urlList = urlList;
         this.context = context;
-        this.layoutInflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
+        this.layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.layout = layout;
         this.append = append;
     }

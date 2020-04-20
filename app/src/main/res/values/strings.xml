@@ -53,4 +53,11 @@
     <string name="data_issue">Data From Server is Null</string>
     <string name="calling_activity">calling new activity</string>
     <string name="details_updated">Details Updated</string>
+    <string name="please_confirm_your_password">Please confirm your Password</string>
+    <string name="cancel">Cancel</string>
+    <string name="confirm">Confirm</string>
+    <string name="confirm_dialog">ConfirmDialog</string>
+    <string name="gallery">Gallery</string>
+    <string name="photo">Photo</string>
+    <string name="next">NEXT</string>
 </resources>
