@@ -1,9 +1,6 @@
 package com.example.instaclone.addMore;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,26 +10,20 @@ import android.widget.GridView;
 import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.instaclone.R;
-import com.example.instaclone.databinding.FragmentEditProfileBinding;
 import com.example.instaclone.databinding.FragmentGalleryBinding;
 import com.example.instaclone.utils.FilePaths;
 import com.example.instaclone.utils.FileSearch;
 import com.example.instaclone.utils.GridImageAdapter;
-import com.example.instaclone.utils.Permissions;
 import com.example.instaclone.utils.UniversalImageLoader;
 
 import java.util.ArrayList;
 
 public class GalleryFragment extends Fragment {
 
-    private static final int GALLERY_FRAG = 0;
-    private static final int PHOTO_FRAG = 1;
-    private static final int IMAGE_REQUEST = 5;
-    private String append = "files:/";
+    private String append = "file:/";
 
     public GalleryFragment() {
         // Required empty public constructor
@@ -49,6 +40,13 @@ public class GalleryFragment extends Fragment {
 
         init();
 
+        binding.galleryCloseBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (getActivity() != null)
+                    getActivity().finish();
+            }
+        });
 
         return binding.getRoot();
     }
@@ -59,7 +57,16 @@ public class GalleryFragment extends Fragment {
         directories = FileSearch.getDirectoriesPath(filePaths.PICTURE_DIR);
         directories.add(filePaths.CAMERA_DIR);
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, directories);
+        ArrayList<String> directoriesNames = new ArrayList<>();
+        for (String directory : directories){
+            int lastIndex = directory.lastIndexOf("/")+1;// to remove /
+            String name = directory.substring(lastIndex);
+            directoriesNames.add(name);
+        }
+
+        if (getContext()==null)
+            return;
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, directoriesNames);
         Spinner spinner = binding.gallerySpinner;
         spinner.setAdapter(arrayAdapter);
 
@@ -86,22 +93,25 @@ public class GalleryFragment extends Fragment {
         gridView.setColumnWidth(columnWidth);
 
 
+        if (getActivity() == null)
+            return;
         GridImageAdapter gridImageAdapter = new GridImageAdapter(getActivity(), filesPath, R.layout.grid_image_item, append);
         gridView.setAdapter(gridImageAdapter);
 
-        setImage(filesPath.get(0));
+        if (filesPath.size() > 0)
+            setImage(filesPath.get(0));
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (position >= 0 && position < filesPath.size())
-                    setUpGridView(filesPath.get(position));
+                    setImage(filesPath.get(position));
             }
         });
 
     }
 
-    private void setImage(String url){
+    private void setImage(String url) {
         UniversalImageLoader.setImage(url, binding.galleryImageView, null, append);
     }
 
