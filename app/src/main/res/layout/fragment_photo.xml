@@ -6,12 +6,12 @@
     tools:context=".home.CameraFragment">
 
     <Button
-        android:visibility="gone"
+        android:visibility="visible"
         android:id="@+id/btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
-        android:text="Photo Fragment" />
+        android:text="Open Camera" />
 
 </FrameLayout>

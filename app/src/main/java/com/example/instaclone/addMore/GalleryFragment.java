@@ -1,5 +1,6 @@
 package com.example.instaclone.addMore;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.instaclone.R;
 import com.example.instaclone.databinding.FragmentGalleryBinding;
+import com.example.instaclone.profile.AccountsSettingActivity;
 import com.example.instaclone.utils.FilePaths;
 import com.example.instaclone.utils.FileSearch;
 import com.example.instaclone.utils.GridImageAdapter;
@@ -24,6 +26,7 @@ import java.util.ArrayList;
 public class GalleryFragment extends Fragment {
 
     private String append = "file:/";
+    private String selectedImage = "";
 
     public GalleryFragment() {
         // Required empty public constructor
@@ -48,7 +51,30 @@ public class GalleryFragment extends Fragment {
             }
         });
 
+        binding.galleryNextTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isRootTask()) {
+                    Intent intent = new Intent(getContext(), NextActivity.class);
+                    intent.putExtra(getString(R.string.selectedImage), selectedImage);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(getContext(), AccountsSettingActivity.class);
+                    intent.putExtra(getString(R.string.selectedImage), selectedImage);
+                    intent.putExtra(getString(R.string.return_to_fragment),
+                            getString(R.string.edit_profile_fragment));
+                    startActivity(intent);
+                    if (getActivity() != null)
+                        getActivity().finish();
+                }
+            }
+        });
+
         return binding.getRoot();
+    }
+
+    private boolean isRootTask() {
+        return ((AddMoreActivity) getActivity()).getFlag() == 0;
     }
 
     private void init() {
@@ -58,13 +84,13 @@ public class GalleryFragment extends Fragment {
         directories.add(filePaths.CAMERA_DIR);
 
         ArrayList<String> directoriesNames = new ArrayList<>();
-        for (String directory : directories){
-            int lastIndex = directory.lastIndexOf("/")+1;// to remove /
+        for (String directory : directories) {
+            int lastIndex = directory.lastIndexOf("/") + 1;// to remove /
             String name = directory.substring(lastIndex);
             directoriesNames.add(name);
         }
 
-        if (getContext()==null)
+        if (getContext() == null)
             return;
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, directoriesNames);
         Spinner spinner = binding.gallerySpinner;
@@ -112,6 +138,7 @@ public class GalleryFragment extends Fragment {
     }
 
     private void setImage(String url) {
+        selectedImage = url;
         UniversalImageLoader.setImage(url, binding.galleryImageView, null, append);
     }
 

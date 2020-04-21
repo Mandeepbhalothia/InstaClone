@@ -1,18 +1,27 @@
 package com.example.instaclone.profile;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.GridView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.example.instaclone.R;
-import com.example.instaclone.databinding.FragmentEditProfileBinding;
 import com.example.instaclone.databinding.FragmentPostBinding;
+import com.example.instaclone.model.Photo;
+import com.example.instaclone.utils.FireBaseMethods;
 import com.example.instaclone.utils.GridImageAdapter;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -42,39 +51,46 @@ public class PostFragment extends Fragment {
         binding = FragmentPostBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
-        getUrlList();
+        setUpGridView();
 
         return view;
     }
 
-    private void getUrlList() {
-        ArrayList<String> urlList = new ArrayList<>();
-        urlList.add("https://www.androidcentral.com/sites/androidcentral.com/files/styles/xlarge/public/article_images/2016/08/ac-lloyd.jpg?itok=bb72IeLf");
-        urlList.add("https://i.redd.it/9bf67ygj710z.jpg");
-        urlList.add("https://c1.staticflickr.com/5/4276/34102458063_7be616b993_o.jpg");
-        urlList.add("http://i.imgur.com/EwZRpvQ.jpg");
-        urlList.add("http://i.imgur.com/JTb2pXP.jpg");
-        urlList.add("https://i.redd.it/59kjlxxf720z.jpg");
-        urlList.add("https://i.redd.it/pwduhknig00z.jpg");
-        urlList.add("https://i.redd.it/clusqsm4oxzy.jpg");
-        urlList.add("https://i.redd.it/svqvn7xs420z.jpg");
-        urlList.add("http://i.imgur.com/j4AfH6P.jpg");
-        urlList.add("https://i.redd.it/89cjkojkl10z.jpg");
-        urlList.add("https://i.redd.it/aw7pv8jq4zzy.jpg");
-        urlList.add("https://i.redd.it/9bf67ygj710z.jpg");
-        urlList.add("https://c1.staticflickr.com/5/4276/34102458063_7be616b993_o.jpg");
-        urlList.add("https://i.redd.it/9bf67ygj710z.jpg");
-        urlList.add("https://c1.staticflickr.com/5/4276/34102458063_7be616b993_o.jpg");
-        urlList.add("https://i.redd.it/9bf67ygj710z.jpg");
-        urlList.add("https://c1.staticflickr.com/5/4276/34102458063_7be616b993_o.jpg");
-        setUpGridView(urlList);
-    }
+    private void setUpGridView() {
+        FirebaseUser currentUser = new FireBaseMethods(getContext()).getCurrentUser();
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+        databaseReference.child(getString(R.string.user_photos)).child(currentUser.getUid())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.getValue() != null) {
+                            final ArrayList<String> urlList = new ArrayList<>();
+                            for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                                Photo photo = dataSnapshot1.getValue(Photo.class);
+                                if (photo != null) {
+                                    urlList.add(photo.getImage_path());
+                                }
+                            }
+                            new Handler().post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    GridView gridView = binding.postGridView;
+                                    int width = getResources().getDisplayMetrics().widthPixels / NO_OF_COLUMN;
+                                    gridView.setColumnWidth(width);
+                                    Log.d("TAG", "onDataChange: "+getResources().getDisplayMetrics().widthPixels+" "+width);
+                                    GridImageAdapter gridImageAdapter = new GridImageAdapter(Objects.requireNonNull(getContext()),
+                                            urlList, R.layout.grid_image_item, "");
+                                    gridView.setAdapter(gridImageAdapter);
+                                }
+                            });
+                        }
+                    }
 
-    private void setUpGridView(ArrayList<String> urlList) {
-        int width = getResources().getDisplayMetrics().widthPixels / NO_OF_COLUMN;
-        binding.postGridView.setColumnWidth(width);
-        GridImageAdapter gridImageAdapter = new GridImageAdapter(Objects.requireNonNull(getContext()), urlList, R.layout.grid_image_item, "");
-        binding.postGridView.setAdapter(gridImageAdapter);
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
     }
 
     @Override

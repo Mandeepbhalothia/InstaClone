@@ -1,5 +1,6 @@
 package com.example.instaclone.profile;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.instaclone.R;
+import com.example.instaclone.addMore.AddMoreActivity;
 import com.example.instaclone.databinding.FragmentEditProfileBinding;
 import com.example.instaclone.dialogs.ConfirmPasswordDialog;
 import com.example.instaclone.model.User;
@@ -72,6 +74,18 @@ public class EditProfileFragment extends Fragment implements ConfirmPasswordDial
             @Override
             public void onClick(View v) {
                 updateUserDetails();
+            }
+        });
+
+        binding.changeProfilePhotoTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), AddMoreActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                if (getActivity() != null) {
+                    getActivity().startActivity(intent);
+                    getActivity().finish();
+                }
             }
         });
 

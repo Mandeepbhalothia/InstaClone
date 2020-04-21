@@ -154,11 +154,6 @@ public class ProfileActivity extends AppCompatActivity {
         followingTv.setText(userSetting.getFollowing());
     }
 
-    /*private void setProfileImage() {
-        String imgURL = "www.androidcentral.com/sites/androidcentral.com/files/styles/xlarge/public/article_images/2016/08/ac-lloyd.jpg?itok=bb72IeLf";
-        UniversalImageLoader.setImage(imgURL, profileImageView, null, "https://");
-    }*/
-
     /*get user account settings from firebase*/
     private void getUserAccountDetails(final DatabaseReference databaseReference) {
         final FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();

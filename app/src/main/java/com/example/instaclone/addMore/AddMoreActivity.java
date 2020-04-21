@@ -38,6 +38,10 @@ public class AddMoreActivity extends AppCompatActivity {
 
     }
 
+    public int getFlag(){
+        return getIntent().getFlags();
+    }
+
     public int getCurrentTabNo(){
         return viewPager.getCurrentItem();
     }

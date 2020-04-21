@@ -73,7 +73,8 @@ public class Common {
                         throw new IllegalStateException("Unexpected value: " + item.getItemId());
                 }
                 context.startActivity(intent);
-                ((Activity)context).finish();
+                ((Activity)context).overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+//                ((Activity)context).finish();
 
                 return true;
             }

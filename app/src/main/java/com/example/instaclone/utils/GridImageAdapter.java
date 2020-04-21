@@ -2,6 +2,7 @@ package com.example.instaclone.utils;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,6 +57,7 @@ public class GridImageAdapter extends ArrayAdapter<String> {
 
         String imageUrl = urlList.get(position);
         ImageLoader imageLoader = ImageLoader.getInstance();
+        Log.d("TAG", "getView: "+viewHolder.postImage.getWidth());
         imageLoader.displayImage(append + imageUrl, viewHolder.postImage, new ImageLoadingListener() {
             @Override
             public void onLoadingStarted(String imageUri, View view) {

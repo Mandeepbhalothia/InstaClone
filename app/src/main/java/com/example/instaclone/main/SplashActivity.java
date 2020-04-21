@@ -61,4 +61,11 @@ public class SplashActivity extends AppCompatActivity {
         // get and check current user
         checkUser();
     }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        binding = null;
+    }
 }
