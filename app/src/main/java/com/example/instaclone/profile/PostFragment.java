@@ -1,11 +1,13 @@
 package com.example.instaclone.profile;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
 
 import androidx.annotation.NonNull;
@@ -34,6 +36,12 @@ public class PostFragment extends Fragment {
     public PostFragment() {
         // Required empty public constructor
     }
+
+    public interface OnGridItemClickListener {
+        public void onGridItemClicked(Photo photo);
+    }
+
+    private OnGridItemClickListener onGridItemClickListener;
 
 
     @Override
@@ -65,22 +73,26 @@ public class PostFragment extends Fragment {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if (dataSnapshot.getValue() != null) {
                             final ArrayList<String> urlList = new ArrayList<>();
+                            final ArrayList<Photo> photoList = new ArrayList<>();
                             for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                                 Photo photo = dataSnapshot1.getValue(Photo.class);
+                                photoList.add(photo);
                                 if (photo != null) {
                                     urlList.add(photo.getImage_path());
                                 }
                             }
-                            new Handler().post(new Runnable() {
+                            GridView gridView = binding.postGridView;
+                            int width = getResources().getDisplayMetrics().widthPixels / NO_OF_COLUMN;
+                            gridView.setColumnWidth(width);
+                            Log.d("TAG", "onDataChange: " + getResources().getDisplayMetrics().widthPixels + " " + width);
+                            GridImageAdapter gridImageAdapter = new GridImageAdapter(Objects.requireNonNull(getContext()),
+                                    urlList, R.layout.grid_image_item, "");
+                            gridView.setAdapter(gridImageAdapter);
+                            gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                 @Override
-                                public void run() {
-                                    GridView gridView = binding.postGridView;
-                                    int width = getResources().getDisplayMetrics().widthPixels / NO_OF_COLUMN;
-                                    gridView.setColumnWidth(width);
-                                    Log.d("TAG", "onDataChange: "+getResources().getDisplayMetrics().widthPixels+" "+width);
-                                    GridImageAdapter gridImageAdapter = new GridImageAdapter(Objects.requireNonNull(getContext()),
-                                            urlList, R.layout.grid_image_item, "");
-                                    gridView.setAdapter(gridImageAdapter);
+                                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                    if (position >= 0 && position < photoList.size())
+                                        onGridItemClickListener.onGridItemClicked(photoList.get(position));
                                 }
                             });
                         }
@@ -91,6 +103,18 @@ public class PostFragment extends Fragment {
 
                     }
                 });
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+
+        try {
+            onGridItemClickListener = (OnGridItemClickListener) getActivity();
+        } catch (ClassCastException e) {
+            Log.e("TAG", "onAttach: classCastException" + e);
+        }
+
     }
 
     @Override

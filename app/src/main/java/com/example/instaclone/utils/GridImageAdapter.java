@@ -2,7 +2,6 @@ package com.example.instaclone.utils;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +24,6 @@ import static com.example.instaclone.utils.Common.showProgressBar;
 public class GridImageAdapter extends ArrayAdapter<String> {
 
     private ArrayList<String> urlList;
-    private Context context;
     private LayoutInflater layoutInflater;
     private int layout;
     private String append;
@@ -33,7 +31,6 @@ public class GridImageAdapter extends ArrayAdapter<String> {
     public GridImageAdapter(@NonNull Context context, ArrayList<String> urlList, int layout, String append) {
         super(context, layout, urlList);
         this.urlList = urlList;
-        this.context = context;
         this.layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.layout = layout;
         this.append = append;
@@ -57,7 +54,6 @@ public class GridImageAdapter extends ArrayAdapter<String> {
 
         String imageUrl = urlList.get(position);
         ImageLoader imageLoader = ImageLoader.getInstance();
-        Log.d("TAG", "getView: "+viewHolder.postImage.getWidth());
         imageLoader.displayImage(append + imageUrl, viewHolder.postImage, new ImageLoadingListener() {
             @Override
             public void onLoadingStarted(String imageUri, View view) {

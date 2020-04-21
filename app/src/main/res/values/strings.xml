@@ -68,4 +68,10 @@
     <string name="profile_photo">profile_photo</string>
     <string name="selectedBitmap">selectedBitmap</string>
     <string name="user_photos">user_photos</string>
+    <string name="activity_no">activity_no</string>
+    <string name="view_post_fragment">view_post_fragment</string>
+    <string name="dummy_post_">Liked by Mandeep, Yogesh and 30 others</string>
+    <string name="dummy">new learning #android#insta</string>
+    <string name="dummy_comment">View all 3 comments</string>
+    <string name="dummy_date">3 days ago</string>
 </resources>

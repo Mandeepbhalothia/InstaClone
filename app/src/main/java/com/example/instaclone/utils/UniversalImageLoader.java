@@ -34,6 +34,7 @@ public class UniversalImageLoader {
                 .showImageOnFail(defaultImage)
                 .cacheInMemory(true)
                 .cacheOnDisk(true)
+                .considerExifParams(true)
                 .resetViewBeforeLoading(true)
                 .imageScaleType(ImageScaleType.EXACTLY)
                 .bitmapConfig(Bitmap.Config.RGB_565)
