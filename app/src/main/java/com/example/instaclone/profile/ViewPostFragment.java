@@ -39,6 +39,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class ViewPostFragment extends Fragment {
 
 
+    private long previousClickTime;
+
     public ViewPostFragment() {
         super();
         setArguments(new Bundle());
@@ -119,9 +121,18 @@ public class ViewPostFragment extends Fragment {
         @Override
         public boolean onDoubleTapEvent(MotionEvent e) {
             Log.d("TAG", "onDoubleTapEvent: ");
-            heart.toggleLike();
+            if (!continueDoubleClick())
+                heart.toggleLike();
             return true;
         }
+    }
+
+    private boolean continueDoubleClick() {
+        if (System.currentTimeMillis() - previousClickTime > 300){
+            previousClickTime = System.currentTimeMillis();
+            return false;
+        }
+        return true;
     }
 
     private void getUserDetailsFromDb() {
