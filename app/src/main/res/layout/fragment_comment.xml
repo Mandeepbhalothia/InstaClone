@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".profile.ViewCommentFragment">
+
+    <!--Toolbar-->
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/white"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/comment_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <ImageButton
+                android:id="@+id/commentBackButton"
+                android:layout_width="40dp"
+                android:layout_height="30dp"
+                android:background="@drawable/ic_back"
+                android:contentDescription="@string/insta_logo_desc" />
+
+            <TextView
+                android:id="@+id/toolbar_name"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:text="@string/comment"
+                android:textColor="@color/black"
+                android:textSize="@dimen/toolbar_text_size" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!--List of comments-->
+    <ListView
+        android:id="@+id/commentListView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottomDivider"
+        app:layout_constraintTop_toBottomOf="@id/appBar"
+        tools:listitem="@layout/item_comment" />
+
+
+    <!--bottom view divider-->
+    <View
+        android:id="@+id/bottomDivider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray"
+        app:layout_constraintBottom_toTopOf="@id/bottomLayout" />
+    <!--bottom comment section-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bottomLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:elevation="4dp"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/commentCurrentUserImage"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:civ_border_width="0.5dp"
+            android:src="@drawable/ic_person"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/commentEt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:autofillHints=""
+            android:hint="@string/add_a_comment"
+            android:inputType="text"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:minHeight="40dp"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:background="@android:color/transparent"
+            app:layout_constraintEnd_toStartOf="@+id/commentPostTv"
+            app:layout_constraintStart_toEndOf="@id/commentCurrentUserImage"
+            app:layout_constraintTop_toTopOf="@id/commentCurrentUserImage" />
+
+        <TextView
+            android:id="@+id/commentPostTv"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:gravity="center_vertical"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:text="@string/post"
+            android:textColor="@color/blue_light"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/commentCurrentUserImage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/commentCurrentUserImage" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

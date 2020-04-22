@@ -59,6 +59,7 @@
     <string name="confirm_dialog">ConfirmDialog</string>
     <string name="gallery">Gallery</string>
     <string name="photo">Photo</string>
+    <string name="photos">photos</string>
     <string name="next">NEXT</string>
     <string name="selectedImage">selectedImage</string>
     <string name="share">Share</string>
@@ -74,4 +75,13 @@
     <string name="dummy">new learning #android#insta</string>
     <string name="dummy_comment">View all 3 comments</string>
     <string name="dummy_date">3 days ago</string>
+    <string name="comment">Comment</string>
+    <string name="post">Post</string>
+    <string name="add_a_comment">Add a comment</string>
+    <string name="reply">Reply</string>
+    <string name="_4_likes">4 likes</string>
+    <string name="_3h">3h</string>
+    <string name="comment_fragment">comment_fragment</string>
+    <string name="field_comment">comments</string>
+    <string name="search_user_name">Search user name</string>
 </resources>

@@ -2,7 +2,6 @@ package com.example.instaclone.profile;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,7 +37,7 @@ public class PostFragment extends Fragment {
     }
 
     public interface OnGridItemClickListener {
-        public void onGridItemClicked(Photo photo);
+        void onGridItemClicked(Photo photo);
     }
 
     private OnGridItemClickListener onGridItemClickListener;

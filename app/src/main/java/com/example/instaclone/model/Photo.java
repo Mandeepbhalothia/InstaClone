@@ -3,6 +3,8 @@ package com.example.instaclone.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.HashMap;
+
 public class Photo implements Parcelable {
     private String caption;
     private String date_created;
@@ -10,17 +12,21 @@ public class Photo implements Parcelable {
     private String photo_id;
     private String user_id;
     private String tags;
+    private HashMap<String, Like> likes;
+    private HashMap<String, Comment> comments;
 
     public Photo() {
     }
 
-    public Photo(String caption, String date_created, String image_path, String photo_id, String user_id, String tags) {
+    public Photo(String caption, String date_created, String image_path, String photo_id, String user_id, String tags, HashMap<String, Like> likes, HashMap<String, Comment> comments) {
         this.caption = caption;
         this.date_created = date_created;
         this.image_path = image_path;
         this.photo_id = photo_id;
         this.user_id = user_id;
         this.tags = tags;
+        this.likes = likes;
+        this.comments = comments;
     }
 
     protected Photo(Parcel in) {
@@ -92,6 +98,22 @@ public class Photo implements Parcelable {
         this.tags = tags;
     }
 
+    public HashMap<String, Like> getLikes() {
+        return likes;
+    }
+
+    public void setLikes(HashMap<String, Like> likes) {
+        this.likes = likes;
+    }
+
+    public HashMap<String, Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(HashMap<String, Comment> comments) {
+        this.comments = comments;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -107,3 +129,4 @@ public class Photo implements Parcelable {
         dest.writeString(tags);
     }
 }
+

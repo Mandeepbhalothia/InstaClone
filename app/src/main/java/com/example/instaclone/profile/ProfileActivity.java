@@ -1,7 +1,6 @@
 package com.example.instaclone.profile;
 
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
@@ -11,7 +10,8 @@ import com.example.instaclone.model.Photo;
 import com.example.instaclone.utils.Common;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class ProfileActivity extends AppCompatActivity implements PostFragment.OnGridItemClickListener {
+public class ProfileActivity extends AppCompatActivity implements PostFragment.OnGridItemClickListener,
+        ViewPostFragment.OnCommentThreadClickListener {
 
     private int ACTIVITY_NO = 4;
 
@@ -48,5 +48,17 @@ public class ProfileActivity extends AppCompatActivity implements PostFragment.O
             transaction.addToBackStack(getString(R.string.view_post_fragment));
             transaction.commit();
         }
+    }
+
+    @Override
+    public void onCommentThreadClicked(Photo photo) {
+        ViewCommentFragment viewCommentFragment = new ViewCommentFragment();
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(getString(R.string.photo),photo);
+        viewCommentFragment.setArguments(bundle);
+        ft.replace(R.id.container, viewCommentFragment);
+        ft.addToBackStack(getString(R.string.comment_fragment));
+        ft.commit();
     }
 }

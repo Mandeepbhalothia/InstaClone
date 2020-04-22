@@ -133,7 +133,7 @@ public class NextActivity extends AppCompatActivity {
         String photoId = databaseReference.child("photos").push().getRef().getKey();
         String tags = getTags(caption);
 
-        Photo photo = new Photo(caption, getDateCreated(), url, photoId, currentUser.getUid(), tags);
+        Photo photo = new Photo(caption, getDateCreated(), url, photoId, currentUser.getUid(), tags, null,null);
         databaseReference.child("photos/"+photoId).setValue(photo);
         assert photoId != null;
         databaseReference.child("user_photos/"+currentUser.getUid()).child(photoId).setValue(photo);

@@ -52,7 +52,7 @@ public class Common {
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Intent intent = new Intent();
+                Intent intent;
                 switch (item.getItemId()) {
                     case R.id.homeMenu:
                         intent = new Intent(context, HomeActivity.class);
@@ -74,7 +74,6 @@ public class Common {
                 }
                 context.startActivity(intent);
                 ((Activity)context).overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
-//                ((Activity)context).finish();
 
                 return true;
             }

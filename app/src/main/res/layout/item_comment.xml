@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="10dp">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/commentItemIV"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:civ_border_width="0.5dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/commentItemUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:gravity="center_vertical"
+        android:text="@string/mandeep_bhalothia"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/commentItemIV"
+        app:layout_constraintStart_toEndOf="@id/commentItemIV"
+        app:layout_constraintTop_toTopOf="@id/commentItemIV" />
+
+    <TextView
+        android:id="@+id/commentTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:gravity="center_vertical"
+        android:textColor="@color/black"
+        android:text="@string/comment"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@id/commentItemLikeIV"
+        app:layout_constraintStart_toEndOf="@id/commentItemUserName"
+        app:layout_constraintTop_toTopOf="@id/commentItemIV" />
+
+    <ImageView
+        android:id="@+id/commentItemLikeIV"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="10dp"
+        android:contentDescription="@string/insta_logo_desc"
+        android:src="@drawable/ic_like"
+        app:layout_constraintBottom_toBottomOf="@id/commentItemIV"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/commentItemIV" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="commentItemIV,commentItemUserName,commentTv,commentItemLikeIV" />
+
+    <TextView
+        android:id="@+id/commentItemTimeTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/_3h"
+        app:layout_constraintTop_toBottomOf="@id/barrier2"
+        app:layout_constraintStart_toStartOf="@+id/commentItemUserName"
+        android:textSize="16sp"
+        android:padding="4dp"/>
+    <TextView
+        android:id="@+id/commentItemLikesTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/_4_likes"
+        app:layout_constraintTop_toBottomOf="@id/barrier2"
+        app:layout_constraintStart_toEndOf="@id/commentItemTimeTv"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginStart="30dp"
+        android:padding="4dp"/>
+    <TextView
+        android:id="@+id/commentItemReplyTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/reply"
+        app:layout_constraintTop_toBottomOf="@id/barrier2"
+        app:layout_constraintStart_toEndOf="@id/commentItemLikesTv"
+        android:textSize="16sp"
+        android:layout_marginStart="30dp"
+        android:textStyle="bold"
+        android:padding="4dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
