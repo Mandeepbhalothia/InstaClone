@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -34,6 +35,8 @@ public class PostFragment extends Fragment {
 
     public PostFragment() {
         // Required empty public constructor
+        super();
+        setArguments(new Bundle());
     }
 
     public interface OnGridItemClickListener {
@@ -58,15 +61,53 @@ public class PostFragment extends Fragment {
         binding = FragmentPostBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
-        setUpGridView();
+        init();
 
         return view;
     }
 
-    private void setUpGridView() {
-        FirebaseUser currentUser = new FireBaseMethods(getContext()).getCurrentUser();
+    private void init() {
+        Bundle bundle = this.getArguments();
+        if (bundle != null && bundle.containsKey(getString(R.string.username))) {
+            String userName = bundle.getString(getString(R.string.username));
+            getUserId(userName);
+        } else {
+            getCurrentUserId();
+        }
+    }
+
+    private void getUserId(String userName) {
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-        databaseReference.child(getString(R.string.user_photos)).child(currentUser.getUid())
+        databaseReference.child(getString(R.string.users)).orderByChild(getString(R.string.username))
+                .equalTo(userName).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.getValue() != null){
+                    String userID = "";
+                    for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
+                        userID = dataSnapshot1.getKey();
+                    }
+                    setUpGridView(userID);
+                } else {
+                    Toast.makeText(getContext(), "Invalid Details", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void getCurrentUserId() {
+        FirebaseUser currentUser = new FireBaseMethods(getContext()).getCurrentUser();
+        setUpGridView(currentUser.getUid());
+    }
+
+    private void setUpGridView(String userId){
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+        databaseReference.child(getString(R.string.user_photos)).child(userId)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

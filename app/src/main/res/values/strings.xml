@@ -84,4 +84,8 @@
     <string name="comment_fragment">comment_fragment</string>
     <string name="field_comment">comments</string>
     <string name="search_user_name">Search user name</string>
+    <string name="view_profile_fragment">view_profile_fragment</string>
+    <string name="followings">followings</string>
+    <string name="followers">followers</string>
+    <string name="user_id">user_id</string>
 </resources>

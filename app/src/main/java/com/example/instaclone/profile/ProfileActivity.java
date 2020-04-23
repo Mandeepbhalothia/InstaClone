@@ -28,11 +28,31 @@ public class ProfileActivity extends AppCompatActivity implements PostFragment.O
         new Common(this).initBottomNavListener(bottomNavigationView);
 
         // load profile fragment initially
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.container,new ProfileFragment());
-        transaction.addToBackStack(getString(R.string.profile));
-        transaction.commit();
+        init();
 
+    }
+
+    private void init() {
+        if (getIntent().hasExtra(getString(R.string.calling_activity))){
+
+            if (getIntent().hasExtra(getString(R.string.user_account_settings))){
+                ViewProfileFragment viewProfileFragment = new ViewProfileFragment();
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                Bundle bundle = new Bundle();
+                bundle.putParcelable(getString(R.string.user_account_settings),
+                        getIntent().getParcelableExtra(getString(R.string.user_account_settings)));
+                viewProfileFragment.setArguments(bundle);
+                ft.replace(R.id.container, viewProfileFragment);
+                ft.addToBackStack(getString(R.string.view_profile_fragment));
+                ft.commit();
+            }
+
+        } else {
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.container,new ProfileFragment());
+            transaction.addToBackStack(getString(R.string.profile));
+            transaction.commit();
+        }
     }
 
     @Override

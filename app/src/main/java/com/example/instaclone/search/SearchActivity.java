@@ -1,11 +1,14 @@
 package com.example.instaclone.search;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
@@ -14,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.instaclone.R;
 import com.example.instaclone.databinding.ActivitySearchBinding;
 import com.example.instaclone.model.UserSetting;
+import com.example.instaclone.profile.ProfileActivity;
 import com.example.instaclone.utils.Common;
 import com.example.instaclone.utils.SearchAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -30,6 +34,7 @@ public class SearchActivity extends AppCompatActivity {
     ActivitySearchBinding binding;
     ListView userList;
     SearchAdapter searchAdapter;
+    ArrayList<UserSetting> userSettings = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +67,18 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
+        userList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (position >= 0 && position < userSettings.size()){
+                    Intent intent = new Intent(SearchActivity.this, ProfileActivity.class);
+                    intent.putExtra(getString(R.string.calling_activity),getString(R.string.search));
+                    intent.putExtra(getString(R.string.user_account_settings), userSettings.get(position));
+                    startActivity(intent);
+                }
+            }
+        });
+
     }
 
     private void getUser(String userName) {
@@ -74,7 +91,7 @@ public class SearchActivity extends AppCompatActivity {
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     Log.d("TAG", "onDataChange: "+dataSnapshot);
                     if (dataSnapshot.getValue() != null) {
-                        ArrayList<UserSetting> userSettings = new ArrayList<>();
+                        userSettings = new ArrayList<>();
                         for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                             UserSetting userSetting = dataSnapshot1.getValue(UserSetting.class);
                             userSettings.add(userSetting);

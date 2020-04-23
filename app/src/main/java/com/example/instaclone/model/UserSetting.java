@@ -1,6 +1,9 @@
 package com.example.instaclone.model;
 
-public class UserSetting {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class UserSetting implements Parcelable {
     private String website;
     private String description;
     private String profile_photo;
@@ -24,6 +27,29 @@ public class UserSetting {
         this.following = following;
         this.display_name = display_name;
     }
+
+    protected UserSetting(Parcel in) {
+        website = in.readString();
+        description = in.readString();
+        profile_photo = in.readString();
+        username = in.readString();
+        posts = in.readString();
+        followers = in.readString();
+        following = in.readString();
+        display_name = in.readString();
+    }
+
+    public static final Creator<UserSetting> CREATOR = new Creator<UserSetting>() {
+        @Override
+        public UserSetting createFromParcel(Parcel in) {
+            return new UserSetting(in);
+        }
+
+        @Override
+        public UserSetting[] newArray(int size) {
+            return new UserSetting[size];
+        }
+    };
 
     public String getWebsite() {
         return website;
@@ -87,5 +113,22 @@ public class UserSetting {
 
     public void setDisplay_name(String display_name) {
         this.display_name = display_name;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(website);
+        dest.writeString(description);
+        dest.writeString(profile_photo);
+        dest.writeString(username);
+        dest.writeString(posts);
+        dest.writeString(followers);
+        dest.writeString(following);
+        dest.writeString(display_name);
     }
 }
