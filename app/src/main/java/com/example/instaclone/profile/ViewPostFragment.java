@@ -23,7 +23,6 @@ import com.example.instaclone.model.UserSetting;
 import com.example.instaclone.utils.FireBaseMethods;
 import com.example.instaclone.utils.Heart;
 import com.example.instaclone.utils.UniversalImageLoader;
-import com.google.android.gms.common.data.DataHolder;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -267,7 +266,7 @@ public class ViewPostFragment extends Fragment {
         if (whiteLikeBtn.getVisibility() == View.VISIBLE) { // disLiked by self
 
             // remove data from db
-            db.child(getString(R.string.user_photos)).child(currentUser.getUid()).child(photo.getPhoto_id())
+            db.child(getString(R.string.user_photos)).child(photo.getUser_id()).child(photo.getPhoto_id())
                     .child("likes").child(likedPostId).removeValue();
             db.child(getString(R.string.photos)).child(photo.getPhoto_id()).child("likes").child(likedPostId).removeValue();
 
@@ -283,7 +282,7 @@ public class ViewPostFragment extends Fragment {
             // add data to db
             String photoKey = db.child(getString(R.string.photos)).push().getRef().getKey();
             assert photoKey != null;
-            db.child(getString(R.string.user_photos)).child(currentUser.getUid()).child(photo.getPhoto_id())
+            db.child(getString(R.string.user_photos)).child(photo.getUser_id()).child(photo.getPhoto_id())
                     .child("likes").child(photoKey).child("user_id").setValue(currentUser.getUid());
             db.child(getString(R.string.photos)).child(photo.getPhoto_id())
                     .child("likes").child(photoKey).child("user_id").setValue(currentUser.getUid());

@@ -115,7 +115,7 @@ public class ViewCommentFragment extends Fragment {
 
         String ref = databaseReference.push().getRef().getKey();
         assert ref != null;
-        databaseReference.child(getString(R.string.user_photos)).child(currentUser.getUid()).child(photo.getPhoto_id())
+        databaseReference.child(getString(R.string.user_photos)).child(photo.getUser_id()).child(photo.getPhoto_id())
                 .child(getString(R.string.field_comment)).child(ref).setValue(comment);
         databaseReference.child(getString(R.string.photos)).child(photo.getPhoto_id())
                 .child(getString(R.string.field_comment)).child(ref).setValue(comment);

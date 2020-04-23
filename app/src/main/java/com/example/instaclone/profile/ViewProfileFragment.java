@@ -31,7 +31,6 @@ import com.example.instaclone.model.UserSetting;
 import com.example.instaclone.utils.FireBaseMethods;
 import com.example.instaclone.utils.UniversalImageLoader;
 import com.google.android.material.tabs.TabLayout;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
